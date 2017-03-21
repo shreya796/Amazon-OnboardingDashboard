@@ -9,9 +9,36 @@ class Table1(models.Model):
     prime_capacity = models.CharField(max_length=45, blank=True, null=True)
     standard_capacity = models.CharField(max_length=45, blank=True, null=True)
 
-"""
+
     class Meta:
         managed = False
         db_table = 'table1'
-        """
         
+
+
+class Prime(models.Model):
+    key_p = models.AutoField(primary_key=True)
+    locker = models.ForeignKey(Table1)
+    day0 = models.IntegerField(blank=True, null=True)
+    day1 = models.IntegerField(blank=True, null=True)
+    day2 = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'prime'
+
+
+class Standard(models.Model):
+    key_s = models.AutoField(primary_key=True)
+    locker = models.ForeignKey(Table1)
+    day0 = models.IntegerField(blank=True, null=True)
+    day1 = models.IntegerField(blank=True, null=True)
+    day2 = models.IntegerField(blank=True, null=True)
+    day3 = models.IntegerField(blank=True, null=True)
+    day4 = models.IntegerField(blank=True, null=True)
+    day5 = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'standard'
+
