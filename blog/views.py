@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Table1
 from django.shortcuts import render, get_object_or_404
 
 from django.shortcuts import redirect
@@ -28,7 +28,7 @@ def post_new(request):
 
 
 def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Table1, pk=pk)
     #categories = Category.objects.all
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -43,25 +43,27 @@ def post_edit(request, pk):
 
 #queryset_list=queryset_list.filter, cant use queryset as queryset is empty
 def post_list(request):
-    posts = Post.objects.all()
+    posts = Table1.objects.all()
     query=request.GET.get("q")
     if query:
         posts = posts.filter(
             Q(city__icontains=query)|
             Q(state__icontains=query)|
             Q(locker_name__icontains=query)|
-            Q(Pincode__icontains=query)|
-            Q(capacity__icontains=query)
+            Q(pincode__icontains=query)|
+            Q(standard_capacity__icontains=query)|
+            Q(prime_capacity__icontains=query)|
+            Q(locker_id__icontains=query)
             ).distinct()
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
 def post_detail(request, pk):  #matches url of type post/2005
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Table1, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_remove(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Table1, pk=pk)
     post.delete()
     return redirect('blog.views.post_list')
 
@@ -75,13 +77,14 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                posts = Post.objects.all()
+                posts = Table1.objects.all()
                 return render(request, 'blog/post_list.html', {'posts': posts})
             else:
                 return render(request, 'blog/login.html', {'error_message': 'Your account has been disabled'})
         else:
             return render(request, 'blog/login.html', {'error_message': 'Invalid login'})
     return render(request, 'blog/login.html')
+
 
 from django.http import HttpResponse
 def login_operational_user(request):
@@ -92,12 +95,19 @@ def login_operational_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponse("Your app")
+                return HttpResponse("Operational Dashboard")
+                #posts = Table1.objects.all()
+                #return render(request, 'blog/post_list.html', {'posts': posts})
+                
             else:
                 return render(request, 'blog/loginoperational.html', {'error_message': 'Your account has been disabled'})
         else:
             return render(request, 'blog/loginoperational.html', {'error_message': 'Invalid login'})
     return render(request, 'blog/loginoperational.html')
+
+
+
+
 
 
 def login_new_user(request):
@@ -108,6 +118,7 @@ def login_new_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                return HttpResponse("OUserview")
                 #posts = Post.objects.all()
                 #return render(request, 'blog/post_list.html', {'posts': posts})
             else:
@@ -119,14 +130,12 @@ def login_new_user(request):
 
 
 
+
+
 from django.http import HttpResponse
 def logout_view(request):
     logout(request)
     return HttpResponse("You have been successfuly logged out")
-    """
-    posts = Post.objects.all()
-    return render(request, 'blog/post_list.html', {'posts': posts})
-    """
 
 
 def register(request):
@@ -139,18 +148,19 @@ def register(request):
         user.set_password(password)
         user.save()
         user = authenticate(username=username, password=password, email=email)
-        """
+    """
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'blog/post_list.html', {'posts': posts}) #first posts means that term will be encountered in the template, last posts means it is the dictionary through which that posts has to search
+                posts = Table1.objects.all()
+                return render(request, 'blog/post_list.html', {'posts': posts}) 
+        posts = Table1.objects.all()
         return render(request, 'blog/login.html')
-        """
+    """
 
 
     context ={
         "form": form,
     }
     return render(request, 'blog/registration_form.html', context)
-
 # Create your views here.
