@@ -24,23 +24,23 @@ def post_new(request):
             #return render(request,'blog/post_edit.html',{'form':form})
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_add.html', {'form': form})
 
 
 from django.http import HttpResponse
-from .models import prime , standard
+#from .models import prime , standard
 
 def post_edit(request, pk):
     post = get_object_or_404(Table1, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
+            """
             CapacityPrime = request.POST.get('prime_capacity')
             CapacityPrime = int(CapacityPrime)
             CapacityStd = request.POST.get('standard_capacity')
             CapacityStd = int(CapacityStd)
-            #ID = request.POST.get('locker_id')
-            #occupiedPrime = select prime.day2 from prime where prime.locker_id = ID 
+       
             ob = prime.objects.get(locker_id=pk)
             occupiedPrime = ob.day2
 
@@ -48,12 +48,13 @@ def post_edit(request, pk):
             occupiedStd = ob2.day5
                        
             if CapacityPrime >= occupiedPrime and  CapacityStd >=occupiedStd :
-
-                post = form.save(commit=False)
-                post.save()
-                return redirect('post_detail', pk=pk)
+			"""
+            post = form.save(commit=False)
+            post.save()
+            return redirect('post_detail', pk=pk)
+            """
             else :
-                return HttpResponse("ERROR : Capacity allotted is less than occupied slots.")
+                return HttpResponse("ERROR : Capacity allotted is less than occupied slots.")"""
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -82,8 +83,25 @@ def post_detail(request, pk):  #matches url of type post/2005
 
 def post_remove(request, pk):
     post = get_object_or_404(Table1, pk=pk)
+    posts = Table1.objects.all()
     post.delete()
+    return render('blog/post_list.html',{'posts' : posts})
+
+
+"""
+def post_remove(request, pk):
+    post = get_object_or_404(Table1, pk=pk)
+    ob = prime.objects.get(locker_id=pk)
+    occupiedPrime = ob.day2
+    ob2 = standard.objects.get(locker_id=pk)
+    occupiedStd = ob2.day5
+    if occupiedStd >0 or occupiedPrime >0 :
+        return HttpResponse("ERROR :Can't delete this locker as already occupied")
+    else :
+        post.delete()
     return redirect('blog.views.post_list')
+
+"""
 
 
 
@@ -126,7 +144,7 @@ def login_operational_user(request):
 
 
 
-
+"""
 
 def login_new_user(request):
     if request.method == "POST":
@@ -146,7 +164,7 @@ def login_new_user(request):
     return render(request, 'blog/login_new_user.html')
 
 
-
+"""
 
 
 

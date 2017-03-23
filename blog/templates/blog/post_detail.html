@@ -9,6 +9,15 @@
          {%if user.is_authenticated%}
         {%endif%}
 
+          </p>
+    <p>Locker Id: {{ post.locker_id }}</p>
+    <p>Locker Name: {{ post.locker_name }}</p>
+    <p>Locker City: {{ post.city }}</p>
+    <p>Locker State: {{ post.state }}</p>
+    <p>Locker Pincode: {{ post.pincode }}</p>
+    <p>Prime Capacity: {{ post.prime_capacity}}</p>
+    <p>Standard Capacity: {{ post.standard_capacity }}</p>
+
 {%comment B%}
 
     <h4>{{ post.city }}</h4>
