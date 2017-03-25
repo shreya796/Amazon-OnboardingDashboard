@@ -4,21 +4,15 @@ from .models import Table1
 from django.contrib.auth.models import User
 
 class PostForm(forms.ModelForm):
-
+    Prime_percentage=forms.CharField()
     class Meta:
         model = Table1 #will follow the Post Model
-        fields = ('locker_id','locker_name','city','state','pincode','prime_capacity','standard_capacity')
+        fields = ('locker_id','locker_name','city','state','pincode','prime_capacity','standard_capacity','Prime_percentage')
 
 
-"""
-class PostForm2(forms.ModelForm):
-    class Meta:
-        model = Post2 #will follow the Post Model
-        fields = ('locker_id','empty_slots_prime','empty_slots_std')
-"""
 
 class UserForm(forms.ModelForm):
-	password=forms.CharField(widget=forms.PasswordInput)
-	class Meta:
-		model=User
-		fields=['username','email','password']
+    password=forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model=User
+        fields=['username','email','password']

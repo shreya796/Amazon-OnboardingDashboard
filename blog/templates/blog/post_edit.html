@@ -1,6 +1,6 @@
 {% extends 'blog\base.html' %}
 {%block title%} Edit Locker {%endblock%}
-{% block content %}
+{% block edit %}
     <h3 class="newpost">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit the locker</h3>
     <script type="text/javascript">
     	function errorAlert(){
@@ -22,7 +22,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_locker_id">Locker id:</label></label>
 
-        <div class="col-sm-2"><input id="id_locker_id" name="locker_id" type="number" value="{{form.locker_id.value}}" required /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_locker_id" name="locker_id" type="number" value="{{form.locker_id.value}}" required /></div>
     </div>
 
     <div class="form-group">
@@ -31,7 +31,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_locker_name">Locker name:</label></label>
 
-        <div class="col-sm-2"><input id="id_locker_name" maxlength="45" name="locker_name" type="text" value="{{form.locker_name.value}}" /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_locker_name" maxlength="45" name="locker_name" type="text" value="{{form.locker_name.value}}" /></div>
     </div>
 
     <div class="form-group">
@@ -40,7 +40,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_city">City:</label></label>
 
-        <div class="col-sm-2"><input id="id_city" maxlength="45" name="city" type="text" value="{{form.city.value}}" /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_city" maxlength="45" name="city" type="text" value="{{form.city.value}}" /></div>
     </div>
 
     <div class="form-group">
@@ -49,7 +49,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_state">State:</label></label>
 
-        <div class="col-sm-2"><input id="id_state" maxlength="45" name="state" type="text" value="{{form.state.value}}" /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_state" maxlength="45" name="state" type="text" value="{{form.state.value}}" /></div>
     </div>
 
     <div class="form-group">
@@ -58,7 +58,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_pincode">Pincode:</label></label>
 
-        <div class="col-sm-2"><input id="id_pincode" maxlength="45" name="pincode" type="text" value="{{form.pincode.value}}" /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_pincode" maxlength="45" name="pincode" type="text" value="{{form.pincode.value}}" /></div>
     </div>
 
     <div class="form-group">
@@ -67,7 +67,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_prime_capacity">Prime capacity:</label></label>
 
-        <div class="col-sm-2"><input id="id_prime_capacity" maxlength="45" name="prime_capacity" type="text" value="{{form.prime_capacity.value}}" disabled /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_prime_capacity" maxlength="45" name="prime_capacity" type="text" value="{{form.prime_capacity.value}}" disabled /></div>
     </div>
 
     <div class="form-group">
@@ -76,7 +76,7 @@
         </div>
         <label class="control-label col-sm-2"><label for="id_standard_capacity">Standard capacity:</label></label>
 
-        <div class="col-sm-2"><input id="id_standard_capacity" maxlength="45" name="standard_capacity" type="text" value="{{form.standard_capacity.value}}" disabled /></div><!--actual input area-->
+        <div class="col-sm-2"><input id="id_standard_capacity" maxlength="45" name="standard_capacity" type="text" value="{{form.standard_capacity.value}}" disabled /></div>
     </div>
 
     <div class="form-group">
@@ -93,7 +93,7 @@
         </div>
         <label class="control-label col-sm-2">Standard Percentage</label>
 
-        <div class="col-sm-2"><input type="text" id="std" onfocus="putValue()" /></div><!--actual input area-->
+        <div class="col-sm-2"><input type="text" id="std" onfocus="putValue()" /></div>
     </div>
         <div class="form-group">
             <div class="col-sm-offset-2-col-sm-3">
@@ -104,4 +104,3 @@
 	</form>
 {% endblock %}
 
-<!--csrf token is for security purpose-->
