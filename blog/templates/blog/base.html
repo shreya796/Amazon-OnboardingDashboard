@@ -43,8 +43,10 @@
 </form>
 {%endif%}
 
+{%if q%}
+<p style = "font-family: Arial; color: Red; size:70px">You have been successfully registered. Please login to continue. </p>
 
-
+{%endif%}
 
 
 
@@ -62,13 +64,14 @@ Add locker
 
 
 {%comment%}
-
-<li class="nav navbar-nav " >
-<a href = "{% url '' %}">
-<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-<font face="ArialBlack" color = "" size="50"></font>User&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</a>
-</li>
+{%if not user.is_authenticated %}
+    <li class="nav navbar-nav " >
+       <a href = "{% url 'item' %}">
+       <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+       <font face="ArialBlack" color = "" size="50"></font>User&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </a>
+   </li>
+   {%endif%}
 
 {%endcomment%}
 

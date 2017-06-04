@@ -130,9 +130,9 @@ def post_detail(request, pk):  #matches url of type post/2005
 
 def login_user(request):
     if request.method == "POST":
-        mail = request.POST['username']
+        username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=mail, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -182,19 +182,16 @@ def register(request):
         user.set_password(password)
         user.save()
         user = authenticate(username=username, password=password, email=email)
-    """
-        if user is not None:
+        if user is not None: 
             if user.is_active:
-                login(request, user)
-                posts = Table1.objects.all()
-                return render(request, 'blog/post_list.html', {'posts': posts}) 
-        posts = Table1.objects.all()
-        return render(request, 'blog/login.html')
-    """
+                #login(request, user)
+                q=1
+                return render(request,'blog/post_list.html', {'q': q})
+        return render(request,'blog/post_list.html', {'q': q})
 
 
     context ={
         "form": form,
     }
     return render(request, 'blog/registration_form.html', context)
-# Create your views here.
+#
